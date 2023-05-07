@@ -1,0 +1,230 @@
+<html>
+
+  <head>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <title>Front End</title>
+
+    <script>
+      function prepareColors() {
+        var colors = [
+          "Black",
+          "Navy",
+          "LawnGreen",
+          "YellowGreen",
+          "Sienna",
+          "Brown",
+          "DarkGray",
+          "DarkGrey",
+          "LightBlue",
+          "GreenYellow",
+          "PaleTurquoise",
+          "LightSteelBlue",
+          "PowderBlue",
+          "FireBrick",
+          "DarkGoldenRod",
+          "MediumOrchid",
+          "RosyBrown",
+          "Violet",
+          "PaleGoldenRod",
+          "LightCoral",
+          "Khaki",
+          "AliceBlue",
+          "Moccasin",
+          "Bisque",
+          "MistyRose",
+          "BlanchedAlmond",
+          "PapayaWhip",
+          "LavenderBlush",
+          "SeaShell",
+          "Cornsilk",
+          "LemonChiffon",
+          "FloralWhite",
+          "Snow",
+          "Yellow",
+          "LightYellow",
+          "Ivory",
+          "White",
+        ];
+        var html = "";
+        colors.forEach(function (color) {
+          html +=
+            "<div class='single-color'><span style=color:" +
+            color +
+            ">" +
+            color +
+            "</span><button>Remove</button></div>";
+        });
+        var divColors = document.getElementById("divColors");
+        divColors.innerHTML = html;
+      }
+    </script>
+  </head>
+
+  <body onload="prepareColors()">
+    <form autocomplete="off" action="/action_page.php" autofocus>
+      <div class="autocomplete" style="width: 300px; margin-top: 20px">
+        <label class="container" id="checkBoxID">
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <span>Click to disable delete option</span>
+        <input id="myInput" type="text" name="myCountry" placeholder="Color" autofocus />
+      </div>
+      <!-- <input type="submit"> -->
+    </form>
+
+    <div class="clsCommon">
+      <div id="divSearch" style="display: none">
+        Search: <input type="text" class="clsCommon" />
+      </div>
+
+      <div id="divColors"></div>
+    </div>
+  </body>
+
+  <script>
+
+    window.setInterval(function () {
+      $(".single-color > span").each(function () {
+        var resd = $("#myInput").val().toLowerCase();
+        var text = $(this).text().toLowerCase();
+        if (resd.length > 0) {
+          if (text.indexOf(resd) == -1) {
+            $($(this).parent()).css("display", "none");
+          } else if (text.indexOf(resd) !== -1) {
+            $($(this).parent()).css("display", "block");
+          }
+        }
+      });
+
+      $("#divColors > div > button").each(function () {
+        $($(this)).click(function () {
+          $($(this).parent()).css("border", "none");
+          $($(this).parent()).empty();
+        });
+      });
+    }, 5000);
+
+    window.setInterval(function () {
+      $("#divColors > div > button").each(function () {
+        $($(this)).click(function () {
+          $($(this).parent()).css("border", "none");
+          $($(this).parent()).empty();
+        });
+      });
+    }, 1500);
+
+    $(document).ready(function () {
+      var stickyNavTop = $("form").offset().top;
+
+      var stickyNav = function () {
+        var scrollTop = $(window).scrollTop();
+
+        if (scrollTop > stickyNavTop) {
+          $("form").addClass("sticky");
+        } else {
+          $("form").removeClass("sticky");
+        }
+      };
+
+      stickyNav();
+
+      $(window).scroll(function () {
+        stickyNav();
+      });
+    });
+
+    $(function () {
+      $("#checkBoxID").on("click", function () {
+        if ($("#checkBoxID > input[type=checkbox]").is(":checked")) {
+          $("#divColors > div > button").attr("disabled", "disabled");
+          $("#divColors > div > button").css("background-color", "#d1d1d1cf");
+        } else {
+          $("#divColors > div > button").removeAttr("disabled");
+          $("#divColors > div > button").css("background-color", "#337ab7");
+        }
+      });
+    });
+  </script>
+
+
+
+  <!-- <script>
+
+    // Javascript program for checking
+    // balanced brackets
+
+    function areBracketsBalanced(expr) {
+
+      let stack = [];
+
+      for (let i = 0; i < expr.length; i++) {
+        let x = expr[i];
+
+        if (x == '(' || x == '[' || x == '{') {
+
+          stack.push(x);
+          continue;
+        }
+
+        if (stack.length == 0)
+          return false;
+
+        let check;
+        switch (x) {
+          case ')':
+            check = stack.pop();
+            if (check == '{' || check == '[')
+              return false;
+            break;
+
+          case '}':
+            check = stack.pop();
+            if (check == '(' || check == '[')
+              return false;
+            break;
+
+          case ']':
+            check = stack.pop();
+            if (check == '(' || check == '{')
+              return false;
+            break;
+        }
+      }
+
+      return (stack.length == 0);
+    }
+
+    let expr = "([{}])";
+
+    if (areBracketsBalanced(expr))
+      console.log("Balanced ");
+    else
+      console.log("Not Balanced ");
+
+  </script> -->
+
+</html>
+
+<!-- Answer number 2: Code which counts a character occurrence in a repeated string -->
+<script>
+  var S = "abcd";
+  var N = 10;
+  var C = "a";
+
+  function char_count(letter) {
+    var letter_Count = 0;
+    var String = S.repeat(10).substr(0, N);
+    console.log(String);
+    for (var position = 0; position < String.length; position++) {
+      if (String.charAt(position) == letter) {
+        letter_Count += 1;
+      }
+    }
+    return letter_Count;
+  }
+
+  console.log(`Result:` + `${char_count(C)}` + ` occurrences`);
+</script>
